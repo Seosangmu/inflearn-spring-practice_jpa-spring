@@ -1,0 +1,23 @@
+# 테스트를 할때는 기본적으로 test/resources/의 설정파일을 우선으로 읽는다.
+# h2 DB는 자바VM으로 돌아가기때문에 메모리 모드로 실행 가능하다 jdbc:h2:mem:testdb
+# 사실 아래 설정파일을 전부 지워도 기본적으로 메모리DB로 설정되어 테스트시 정상 동작한다.
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace # SQL쿼리파라미터 확인
