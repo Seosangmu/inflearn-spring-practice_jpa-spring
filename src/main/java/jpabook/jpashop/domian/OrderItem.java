@@ -2,13 +2,16 @@ package jpabook.jpashop.domian;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domian.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // protected OrderItem() {} 생성자를 만들어 외부에서 new를 막는다. createOrderItem 형식을 따르게하기 위해
 public class OrderItem {
 
     @Id @GeneratedValue
@@ -28,7 +31,7 @@ public class OrderItem {
     private int count; // 주문 수량
 
     //==생성 메서드==//
-    public OrderItem createOrderItem(Item item, int orderPrice, int count) {
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setOrderPrice(orderPrice);

@@ -1,7 +1,9 @@
 package jpabook.jpashop.domian;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.aspectj.weaver.ast.Or;
 
@@ -14,6 +16,7 @@ import static jakarta.persistence.FetchType.*;
 @Entity
 @Table(name = "orders")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)// protected Order() {} 생성자를 만들어 외부에서 new를 막는다. createOrder 형식을 따르게하기 위해
 public class Order {
 
     @Id @GeneratedValue
