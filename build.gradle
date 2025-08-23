@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools' // 서버재시작 없이 '다시 빌드'로 반영 가능
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.10.0' // SQL쿼리파라미터 로그'?' 확인 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
