@@ -15,6 +15,7 @@ public class Book extends Item {
 
     public static Book createBook(BookForm bookForm) {
         Book book = new Book();
+        book.setId(bookForm.getId());
         book.setName(bookForm.getName());
         book.setPrice(bookForm.getPrice());
         book.setStockQuantity(bookForm.getStockQuantity());
