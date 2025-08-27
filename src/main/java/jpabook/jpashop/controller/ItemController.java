@@ -62,10 +62,13 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@PathVariable String itemId, @ModelAttribute("form") BookForm form) {
-        Book book = Book.createBook(form);
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
+        // Book book = Book.createBook(form);
+        // 준영속 엔티티다, merge를 사용하는거보다는 변경감지를 사용하는것이 더 좋다.
+        // merge는 넘어온 파라미터가 null 인것도 전부 필드에 넣어 update하기 때문에 위험하다.
+        // 또한 컨트롤러에서 어설프게 엔티티를 만들어 넘기는것도 좋지않다.
 
-        itemService.saveItem(book);
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity(), form.getAuthor(), form.getIsbn());
         return "redirect:/items";
     }
 }

@@ -1,5 +1,7 @@
 package jpabook.jpashop.service;
 
+import jpabook.jpashop.controller.BookForm;
+import jpabook.jpashop.domian.item.Book;
 import jpabook.jpashop.domian.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,26 @@ public class ItemService {
     public void saveItem(Item item) {
         itemRepository.save(item);
     }
+
+    /**
+     * 상품 수정
+     */
+    @Transactional
+    public void updateItem(Long itemId, String name, int price, int stockQuantity, String author, String isbn/*파라미터가 많다면 DTO같은 걸 만들어 넣어보자*/) {
+        Book findItem = (Book) itemRepository.findOne(itemId); // 영속성 엔티티
+
+        // 아래처럼 set을 열어 수정하면 나중에 유지보수성에 좋지않다.
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+        findItem.setAuthor(author);
+        findItem.setIsbn(isbn);
+
+        // 아래처럼 엔티티에 명확한 메소드를 만들어 호출하는게 유지보수성에 더 좋다.
+        // findItem.changeItem(name, price, stockQuantity);
+
+    }
+
 
     /**
      * 상품 전체 조회
