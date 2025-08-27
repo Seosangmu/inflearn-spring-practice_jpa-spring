@@ -1,18 +1,15 @@
 package jpabook.jpashop.repository;
 
-import ch.qos.logback.core.util.StringUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
-import jpabook.jpashop.domian.Member;
-import jpabook.jpashop.domian.Order;
+import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.data.jpa.repository.JpaContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +58,10 @@ public class OrderRepository {
 
         TypedQuery<Order> query = em.createQuery(jpql, Order.class)
                 .setMaxResults(1000); //최대 1000건
+
+        if (orderSearch.getMemberName() != null && !"".equals(orderSearch.getMemberName())) {
+            query = query.setParameter("name", orderSearch.getMemberName());
+        }
 
         if (orderSearch.getOrderStatus() != null) {
             query = query.setParameter("status", orderSearch.getOrderStatus());
